@@ -5,8 +5,8 @@
 
 namespace net{
 
-constexpr bool is_big_endian(void)noexcept;
-constexpr bool is_small_endian(void)noexcept;
+bool is_big_endian(void)noexcept;
+bool is_small_endian(void)noexcept;
 
 uint16_t host_to_net_short(uint16_t host_short)noexcept;
 uint16_t net_to_host_short(uint16_t net_short)noexcept;

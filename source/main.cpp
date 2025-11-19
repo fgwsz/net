@@ -1,6 +1,7 @@
 #include"main.h"
+#include"test.hpp"
 
 int main(int argc,char* argv[]){
-    ::std::cout<<"hello world!\n";
+    ::test();
     return 0;
 }
