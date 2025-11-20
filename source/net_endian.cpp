@@ -1,13 +1,13 @@
 #include<net_endian.h>
 
-#include<cstdint>//uint8_t uint16_t uint32_t
+#include<cstdint>//::std::uint8_t ::std::uint16_t ::std::uint32_t
 
 namespace net{
 
 bool is_big_endian(void)noexcept{
     union{
-        uint8_t data_[4];
-        uint32_t number_;
+        ::std::uint8_t data_[4];
+        ::std::uint32_t number_;
     }test;
     test.number_=0x01020304;
     return test.data_[0]==0x01;
@@ -19,25 +19,25 @@ bool is_small_endian(void)noexcept{
 
 namespace detail{
 
-inline uint16_t endian_swap_short(uint16_t number)noexcept{
+inline ::std::uint16_t endian_swap_short(::std::uint16_t number)noexcept{
     union{
-        uint8_t data_[2];
-        uint16_t number_;
+        ::std::uint8_t data_[2];
+        ::std::uint16_t number_;
     }result;
     result.number_=number;
-    uint8_t temp=result.data_[0];
+    ::std::uint8_t temp=result.data_[0];
     result.data_[0]=result.data_[1];
     result.data_[1]=temp;
     return result.number_;
 }
 
-inline uint32_t endian_swap_long(uint32_t number)noexcept{
+inline ::std::uint32_t endian_swap_long(::std::uint32_t number)noexcept{
     union{
-        uint8_t data_[4];
-        uint32_t number_;
+        ::std::uint8_t data_[4];
+        ::std::uint32_t number_;
     }result;
     result.number_=number;
-    uint8_t temp=result.data_[0];
+    ::std::uint8_t temp=result.data_[0];
     result.data_[0]=result.data_[3];
     result.data_[3]=temp;
     temp=result.data_[1];
@@ -48,26 +48,26 @@ inline uint32_t endian_swap_long(uint32_t number)noexcept{
 
 }//namespace net::detail
 
-uint16_t host_to_net_short(uint16_t host_short)noexcept{
+::std::uint16_t host_to_net_short(::std::uint16_t host_short)noexcept{
     if(::net::is_big_endian()){
         return host_short;
     }
     return ::net::detail::endian_swap_short(host_short);
 }
-uint16_t net_to_host_short(uint16_t net_short)noexcept{
+::std::uint16_t net_to_host_short(::std::uint16_t net_short)noexcept{
     if(::net::is_big_endian()){
         return net_short;
     }
     return ::net::detail::endian_swap_short(net_short);
 }
 
-uint32_t host_to_net_long(uint32_t host_long)noexcept{
+::std::uint32_t host_to_net_long(::std::uint32_t host_long)noexcept{
     if(::net::is_big_endian()){
         return host_long;
     }
     return ::net::detail::endian_swap_long(host_long);
 }
-uint32_t net_to_host_long(uint32_t net_long)noexcept{
+::std::uint32_t net_to_host_long(::std::uint32_t net_long)noexcept{
     if(::net::is_big_endian()){
         return net_long;
     }
